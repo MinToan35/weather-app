@@ -50,11 +50,15 @@ export default function App() {
 
     return `${day} ${date} ${month} ${year}`;
   };
+  function KtoC(K) {
+    return Math.floor(K - 273.15);
+  }
+
   return (
     <div
       className={
         typeof weather.main != "undefined"
-          ? weather.main.temp > 16
+          ? KtoC(weather.main.temp) > 22
             ? "app warm"
             : "app"
           : "app"
@@ -80,9 +84,7 @@ export default function App() {
               <div className="date">{dataBuilder(new Date())}</div>
             </div>
             <div className="weather-box">
-              <div className="temp">
-                {Math.round(weather.main.temp) - 273}°c
-              </div>
+              <div className="temp">{KtoC(weather.main.temp)}°c</div>
               <div className="weather">{weather.weather[0].main}</div>
             </div>
           </div>
